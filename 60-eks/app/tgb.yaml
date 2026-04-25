@@ -10,6 +10,6 @@ metadata:
 spec:
   targetType: ip
   serviceRef:
-    name: frontend # route traffic to the awesome-service
+    name: frontend # route traffic to the frontend
     port: 80
   targetGroupARN: arn:aws:elasticloadbalancing:us-east-1:334602727445:targetgroup/roboshop-dev-frontend/e736c77c842a6c89
