@@ -42,14 +42,16 @@ resource "aws_instance" "jenkins_agent" {
 
 resource "aws_instance" "sonarqube" {
   count = var.sonar ? 1 : 0
-  ami           = local.sonar_ami_id
-  instance_type = "t3.large"
+  # ami           = local.sonar_ami_id
+  ami           = local.ami_id
+  instance_type = "t3.medium"
   vpc_security_group_ids = [local.sonar_sg_id]
   subnet_id = local.public_subnet_id #replace your Subnet in default VPC
-  key_name = "daws-88s"
+  # key_name = "daws-88s"
+  user_data = file("sonar-server.sh")
   # need more for terraform
   root_block_device {
-    volume_size = 20
+    volume_size = 40
     volume_type = "gp3" # or "gp2", depending on your preference
   }
   tags = merge(
